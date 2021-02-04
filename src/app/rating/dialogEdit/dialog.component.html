@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Enter Name" [(ngModel)]="node.name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter Type" [(ngModel)]="node.type">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()" style="position: relative;right: 15px;">
+    Cancle
+  </button>
+   <button mat-button color="primary" [mat-dialog-close]="{name: node.name, type: node.type}" cdkFocusInitial >save</button>
+</div>
