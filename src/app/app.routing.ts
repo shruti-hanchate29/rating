@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from "@angular/router";
 import { DemoComponent } from "./demo/demo.component";
-import { RatingComponent } from "./todo/rating.component";
+import { RatingComponent } from "./rating/rating.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { HomeComponent } from "./home/home.component";
 const arr : Routes=  [

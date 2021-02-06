@@ -49,14 +49,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from "@angular/forms"
 import { arrRouting } from "./app.routing";
 import { DemoComponent } from './demo/demo.component';
-import { RatingComponent } from "./todo/rating.component";
+import { RatingComponent } from "./rating/rating.component";
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DialogComponent } from './todo/dialogEdit/dialog.component';
+import { DialogComponent } from './rating/dialogEdit/dialog.component';
 import { HomeComponent } from './home/home.component';
-import { PopupComponent } from './todo/popup/popup.component';
-import { AddpopupComponent } from './todo/addpopup/addpopup.component';
+import { PopupComponent } from './rating/popup/popup.component';
+import { AddpopupComponent } from './rating/addpopup/addpopup.component';
 @NgModule({
   declarations: [
     AppComponent,
