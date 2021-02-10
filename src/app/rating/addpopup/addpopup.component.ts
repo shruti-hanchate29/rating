@@ -14,11 +14,14 @@ export class AddpopupComponent implements OnInit {
   buttonEnabled = false;
   okEnabled = false;
   okdisabled = false;
+  namedisabled = false;
+  initialdisabled = true;
   type;
   count;
   listConditions: any;
   children;
   msg;
+  message;
   constructor(public _database: RatingDatabase, public dialog: MatDialogRef<RatingComponent>,
     @Inject(MAT_DIALOG_DATA) public node: FileNode) {
     this.updateTypes(node.type);
@@ -41,7 +44,7 @@ export class AddpopupComponent implements OnInit {
         this.getChildNode(item)
         {
             var item =this.children;
-            var atom= item.children;
+            var atom = item.children;
             var count = atom.length;
          for (var i = 0; i < count; ++i) {
            {
@@ -51,8 +54,13 @@ export class AddpopupComponent implements OnInit {
              this.okdisabled=true;
              this.node.name = "Universal";
              this.okEnabled =true;
-           }}}
-         this.packageEnabled = true;
+           }
+          else{
+            this.node.name = "Universal";
+            this.okEnabled =true;
+          }
+          }}
+
        }}
     else if(item==RatingConstants.TYPE_ZONE1)
       {
@@ -68,8 +76,13 @@ export class AddpopupComponent implements OnInit {
             this.msg ="Repetition not allowed!..."
              this.okdisabled=true;
              this.node.name = "Global";
-             this.okEnabled =true;
-           }}}
+             this.okEnabled = true;
+           }
+          else{
+            this.node.name = "Global";
+            this.namedisabled =true;
+          }
+          }}
          this.packageEnabled = true;
        }}
       else if(item !=RatingConstants.TYPE_ZONE1 && RatingConstants.TYPE_ZONE)
@@ -77,7 +90,9 @@ export class AddpopupComponent implements OnInit {
         this.okEnabled =false;
         this.packageEnabled = true;
         this.msg ="";
+        this.node.name="";
       }
+     // this.buttonEnabled =true;
   }
 
   selectedName(item){

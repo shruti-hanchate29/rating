@@ -28,25 +28,6 @@
 
       <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
         <button mat-icon-button disabled matTreeNodeToggle></button>
-         <!-- <div mat-dialog-content>
-          <mat-form-field appearance="outline">
-            <mat-label>Type</mat-label>
-            <mat-select #typeValue required>
-              <mat-option *ngFor="let type of nodeTypes" [value]="type">
-                {{type}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>&nbsp;
-
-          <mat-form-field appearance="outline">
-            <mat-label>New item...</mat-label>
-            <input matInput #itemValue placeholder="Ex. Lettuce" >
-          </mat-form-field>
-        </div> -->
-
-          <!-- <button mat-raised-button color="primary" (click)="saveNode(node, itemValue.value, typeValue)">save</button>&nbsp; -->
-        <!-- <button mat-button (click)="saveNode(node, itemValue.value, typeValue)"><mat-icon class="element-style" matTooltip="Save" color="accent">save</mat-icon></button> -->
-        <!-- <button mat-raised-button color="warn" (click)="deleteNode(node)" >cancle</button> -->
       </mat-tree-node>
 
       <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
