@@ -175,7 +175,6 @@ export class RatingComponent implements AfterViewInit {
       if (this.getLevel(currentNode) < currentLevel) {
        //  console.log(currentNode);
         return currentNode;
-
       }
     }
     return null;
@@ -195,23 +194,17 @@ export class RatingComponent implements AfterViewInit {
         width: 'auto',
         data: {node,type,children}
       });
-
-  dialogRef.afterClosed().subscribe(result =>
-    {
-        if(result != null)
-        {
+  dialogRef.afterClosed().subscribe(result => {
+        if(result != null){
         node.name = result.name;
         node.type = result.type;
         const nestedNode = this.flatNodeMap.get(node);
         this._database.insertItem(nestedNode!, node.name, node.type);
-        this.treeControl.expand(node);
         }
-        else
-        {
+        else{
           this.treeControl.expand(node);
         }
     });
-    this.treeControl.expand(node);
     }
 
   deleteNode(node: TreeNode) {
@@ -220,16 +213,14 @@ export class RatingComponent implements AfterViewInit {
     // Map from flat node to nested node.
     const parentIcon =this.getLevel(node);
     const parentHasChild =this.hasChild(parentIcon,node);
-    if(parentHasChild==true)
-    {
+    if(parentHasChild==true){
       const message = `Please First Delete Child Elements!...`;
       const dialogData= new ConfirmDialogModel("Failed to delete!...", message);
       const dialogRef = this.dialog.open(PopupComponent, {
         data: dialogData
       });
     }
-    else
-    {
+    else{
       const parentFlat = this.flatNodeMap.get(parentNode);
       this._database.deleteItem(parentFlat!, node.name);
       this.treeControl.expand(node);
@@ -242,15 +233,13 @@ export class RatingComponent implements AfterViewInit {
       data: {name,type}
     });
      dialogRef.afterClosed().subscribe(result => {
-      if(result != null)
-      {
+      if(result != null){
           node.name = result.name;
           node.type = result.type;
           const nestedNode = this.flatNodeMap.get(node);
           this._database.updateItem(nestedNode!, node.name, node.type);
           }
-          else
-          {
+          else{
             this.treeControl.expand(node);
           }
         });
@@ -261,8 +250,7 @@ export class RatingComponent implements AfterViewInit {
   }
 
   selectedItem: any;
-  selectedNode(node: TreeNode)
-  {
+  selectedNode(node: TreeNode){
      this.flag1=!this.flag1;
      this.selectedItem = this.getChildNode(node);
     //console.log('Selected Node: ', this.selectedItem);
@@ -271,8 +259,7 @@ export class RatingComponent implements AfterViewInit {
      this.tableHeader = children;
      this.level=this.getLevel(node);
      this.createdDate =Date.now();
-     for (var i=1; i<this.tableData.length; i++)
-      {
+     for (var i=1; i<this.tableData.length; i++) {
        this.count++;
       }
   }
@@ -298,5 +285,4 @@ export class RatingComponent implements AfterViewInit {
         return 'home';
     }
   }
-
 }

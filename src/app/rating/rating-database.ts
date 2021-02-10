@@ -11,15 +11,11 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 @Injectable({ providedIn: 'root' })
 export class RatingDatabase {
   dataChange = new BehaviorSubject<FileNode[]>([]);
-
   get data(): FileNode[] { return this.dataChange.value; }
-  treeControl: FlatTreeControl<TreeNode>;
   constructor() {
     this.initialize();
   }
 
-  name;
-  type;
   initialize() {
     // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
     //     file node as children.

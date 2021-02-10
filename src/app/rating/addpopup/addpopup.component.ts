@@ -10,18 +10,15 @@ import { FileNode, RatingComponent, TreeNode } from '../rating.component';
 })
 export class AddpopupComponent implements OnInit {
   nodeTypes =[];
-  packageEnabled = false;
-  buttonEnabled = false;
   okEnabled = false;
   okdisabled = false;
   namedisabled = false;
   initialdisabled = true;
   type;
   count;
-  listConditions: any;
   children;
   msg;
-  message;
+
   constructor(public _database: RatingDatabase, public dialog: MatDialogRef<RatingComponent>,
     @Inject(MAT_DIALOG_DATA) public node: FileNode) {
     this.updateTypes(node.type);
@@ -40,14 +37,13 @@ export class AddpopupComponent implements OnInit {
 
   /* this Method is for check the selectedtype */
   selectedType(item){
-    if(item==RatingConstants.TYPE_ZONE){
+    if(item==RatingConstants.TYPE_ZONE) {
         this.getChildNode(item)
         {
             var item =this.children;
             var atom = item.children;
             var count = atom.length;
          for (var i = 0; i < count; ++i) {
-           {
            if(atom[i].type ==RatingConstants.TYPE_ZONE)
            {
              this.msg ="Repetition not allowed!..."
@@ -58,53 +54,42 @@ export class AddpopupComponent implements OnInit {
           else{
             this.node.name = "Universal";
             this.okEnabled =true;
-          }
           }}
-
+          if(item.children==0)
+          {
+            this.node.name = "Universal";
+            this.namedisabled =true;
+          }
        }}
-    else if(item==RatingConstants.TYPE_ZONE1)
-      {
+    else if(item==RatingConstants.TYPE_ZONE1) {
         this.getChildNode(item)
         {
             var item =this.children;
             var atom= item.children;
             var count = atom.length;
          for (var i = 0; i < count; ++i) {
-           {
-           if(atom[i].type ==RatingConstants.TYPE_ZONE1)
-           {
+           if(atom[i].type ==RatingConstants.TYPE_ZONE1){
             this.msg ="Repetition not allowed!..."
              this.okdisabled=true;
              this.node.name = "Global";
              this.okEnabled = true;
            }
-          else{
+          else {
+            this.node.name = "Global";
+            this.namedisabled =true;
+          }}
+          if(item.children==0)
+          {
             this.node.name = "Global";
             this.namedisabled =true;
           }
-          }}
-         this.packageEnabled = true;
        }}
-      else if(item !=RatingConstants.TYPE_ZONE1 && RatingConstants.TYPE_ZONE)
-      {
+      else if(item !=RatingConstants.TYPE_ZONE1 && RatingConstants.TYPE_ZONE) {
         this.okEnabled =false;
-        this.packageEnabled = true;
         this.msg ="";
         this.node.name="";
       }
-     // this.buttonEnabled =true;
   }
-
-  selectedName(item){
-  if(item != null)
-   {
-      this.buttonEnabled =true;
-   }
-  else{
-    this.buttonEnabled = false;
-  }
-  }
-
 
 /* for Update the nodeType which is array */
   updateTypes(type: string)
