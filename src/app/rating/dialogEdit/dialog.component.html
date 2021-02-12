@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Select Type</mat-label>
+    <mat-select [(ngModel)]="node.type">
+      <mat-option *ngFor="let type of nodeTypes" [value]="type">
+        {{type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>&nbsp; <br/>
+
+  <mat-form-field appearance="outline">
+    <mat-label>New item...</mat-label>
+    <input matInput [(ngModel)]="node.name" [disabled]="okEnabled">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="padding-left: 24px;">
+<button mat-raised-button color="primary" [disabled]="!node.name && node.type" [mat-dialog-close]="{name: node.name, type: node.type}" cdkFocusInitial >save</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancle</button>
+  </div>

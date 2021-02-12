@@ -1,0 +1,109 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" >
+
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.item">
+            <mat-icon *ngIf="addIcon(node)" class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+        </button>
+
+        <mat-icon color="primary" [attr.aria-label]="node.type + 'icon'">
+          {{ getMatIcon(node) }}
+        </mat-icon>
+
+        <mat-label mat-raised-button (click)="selectedNode(node)"
+            [matTooltip]="node.type"
+            matTooltipPosition="right"
+            matTooltipClass="example-tooltip-red"
+            >
+            {{node.name}}
+        </mat-label>
+        <button mat-icon-button *ngIf="addIcon(node)" (click)="addNode(node)"><mat-icon matTooltip="add" color="accent">add_box</mat-icon></button>
+        <button mat-icon-button (click)="deleteNode(node)"><mat-icon matTooltip="Delete" color="warn">delete_forever</mat-icon></button>
+        <button mat-icon-button (click)="editItem(node,node.name,node.type)"><mat-icon matTooltip="edit" color="accent">edit</mat-icon></button>
+      </mat-tree-node>
+
+      <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+        <button mat-icon-button disabled matTreeNodeToggle></button>
+      </mat-tree-node>
+
+      <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror" >
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <mat-icon color="primary" [attr.aria-label]="node.type + 'icon'">
+          {{ getMatIcon(node) }}
+        </mat-icon>
+
+        <mat-label mat-raised-button (click)="selectedNode(node)" [matTooltip]="node.type"
+          matTooltipPosition="right"
+          matTooltipClass="example-tooltip-red">
+          {{node.name}}
+        </mat-label>
+        <button mat-icon-button *ngIf="addIcon(node)" (click)="addNode(node)"><mat-icon matTooltip="Add" color="accent">add_box</mat-icon></button>
+        <button mat-icon-button *ngIf="getLevel(node) != 0"  (click)="deleteNode(node)"><mat-icon matTooltip="Delete" color="warn">delete_forever</mat-icon></button>
+        <button mat-icon-button (click)="editItem(node,node.name,node.type)"><mat-icon matTooltip="edit" color="accent">edit</mat-icon></button>
+      </mat-tree-node>
+    </mat-tree>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p><button mat-button (click)="sidenav.toggle()" ><mat-icon>menu</mat-icon></button></p>
+
+      <div *ngIf="flag1" align="center" >
+           <!-- <pre>{{ selectedItem |json }}</pre> -->
+         <!-- <pre>{{dataSource.data | json}}</pre> -->
+
+
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="tableData" matSort>
+
+                  <ng-container matColumnDef="program_id">
+                    <th mat-header-cell *matHeaderCellDef>program_id </th>
+                    <td mat-cell *matCellDef="let element" > {{count}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> {{tableHeader.name}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="version_id">
+                    <th mat-header-cell *matHeaderCellDef> version_id </th>
+                    <td mat-cell *matCellDef="let element"> {{level+1}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef > {{tableHeader.type}} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="created_date">
+                    <th mat-header-cell *matHeaderCellDef>created_date </th>
+                    <td mat-cell *matCellDef="let element"> {{createdDate|date}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="modified_date">
+                    <th mat-header-cell *matHeaderCellDef> modified_date </th>
+                    <td mat-cell *matCellDef="let element"> {{modifiedDate | date}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </div>
+              <mat-paginator class="mat-paginator-container" [pageSizeOptions]="[3, 5, 10]" showFirstLastButtons></mat-paginator>
+      </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+

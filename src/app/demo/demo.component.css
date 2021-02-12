@@ -1,0 +1,14 @@
+.mat-tree-node:empty {
+  display: none;
+}
+
+.mat-checkbox{
+  color: rgb(125, 212, 74);
+}
+  .checklist-leaf-node {
+  color: lightgray;
+
+}
+.checklist-node {
+  color: blue;
+  }
